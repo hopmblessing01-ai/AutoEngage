@@ -94,7 +94,7 @@ export default function AboutPage() {
                       alt={member.imageAlt}
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
-                      className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+                      className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
                   <div className="flex flex-1 flex-col border-t border-slate-100 bg-gradient-to-b from-blue-50/40 to-white px-5 py-5 sm:px-6 sm:py-6">

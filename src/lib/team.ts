@@ -12,7 +12,7 @@ export const teamMembers: TeamMember[] = [
     name: "Blessing Igwegbe",
     role: "CEO",
     bio: "Leads strategy and delivery with strong technical depth across CRM, automation, and AI systems.",
-    image: "/images/teams/blessing%20igwegbe.png",
+    image: "/images/teams/blessing.png",
     imageAlt: "Portrait of Blessing Igwegbe",
   },
   {
