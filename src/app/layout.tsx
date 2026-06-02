@@ -1,6 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import {
+  brandKeywords,
+  contactEmail,
+  defaultDescription,
+  siteName,
+  siteTagline,
+  siteUrl,
+} from "@/lib/site-seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,8 +16,6 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
-
-const siteUrl = "https://autoengage.com";
 
 export const viewport: Viewport = {
   themeColor: "#f8fafc",
@@ -19,7 +25,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: "AutoEngage",
+  applicationName: siteName,
   icons: {
     icon: "./favicon.ico",
     shortcut: "./favicon.ico",
@@ -29,53 +35,83 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "AutoEngage | Business Automation & CRM Consulting",
-    template: "%s | AutoEngage",
+    default: `${siteName} | ${siteTagline}`,
+    template: `%s | ${siteName}`,
   },
-  description:
-    "We design and automate business systems that scale your operations - from CRM setup to AI-powered workflows. Book a free consultation.",
-  keywords: [
-    "business automation",
-    "CRM consulting",
-    "workflow automation",
-    "n8n",
-    "Zapier",
-    "Make",
-    "AI chatbots",
-  ],
+  description: defaultDescription,
+  keywords: brandKeywords,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  category: "Business automation",
   openGraph: {
-    title: "AutoEngage | Business Automation & CRM Consulting",
-    description:
-      "Eliminate manual work and connect your tools into one efficient system. CRM, workflows, and AI automation.",
-    siteName: "AutoEngage",
+    title: `${siteName} | ${siteTagline}`,
+    description: defaultDescription,
+    siteName,
     type: "website",
     locale: "en_US",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "AutoEngage | Business Automation & CRM Consulting",
-    description:
-      "Eliminate manual work and connect your tools into one efficient system.",
+    title: `${siteName} | ${siteTagline}`,
+    description: defaultDescription,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? {
+        verification: {
+          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        },
+      }
+    : {}),
 };
 
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "AutoEngage",
-  url: siteUrl,
-  description:
-    "Business automation and systems consulting: CRM, workflow automation, and AI assistants.",
-  areaServed: "Worldwide",
-  serviceType: [
-    "CRM consulting",
-    "Business process automation",
-    "Workflow automation",
-    "AI chatbot implementation",
-  ],
-};
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteName,
+    url: siteUrl,
+    email: contactEmail,
+    description: defaultDescription,
+    sameAs: [],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteName,
+    url: siteUrl,
+    description: defaultDescription,
+    publisher: { "@type": "Organization", name: siteName },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: siteName,
+    url: siteUrl,
+    email: contactEmail,
+    description: defaultDescription,
+    areaServed: "Worldwide",
+    serviceType: [
+      "CRM consulting",
+      "Workflow automation",
+      "AI chatbot implementation",
+      "Voice agent automation",
+      "Business process automation",
+    ],
+  },
+];
 
 export default function RootLayout({
   children,
@@ -92,7 +128,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
+            __html: JSON.stringify(jsonLd),
           }}
         />
         <SmoothScroll>{children}</SmoothScroll>

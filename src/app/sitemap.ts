@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { serviceSlugs } from "@/lib/service-content";
+import { siteUrl } from "@/lib/site-seo";
 
-const baseUrl = "https://autoengage.com";
+const baseUrl = siteUrl;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

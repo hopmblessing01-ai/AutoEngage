@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site-seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://autoengage.com/sitemap.xml",
-    host: "https://autoengage.com",
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }
