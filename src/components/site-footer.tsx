@@ -132,10 +132,10 @@ export function SiteFooter() {
                       Email
                     </p>
                     <a
-                      href="mailto:hello@scaleflow.example"
+                      href="mailto:hopmblessing@gmail.com"
                       className="mt-0.5 block font-medium text-white transition hover:text-sky-300"
                     >
-                      hello@scaleflow.example
+                      hopmblessing@gmail.com
                     </a>
                   </div>
                 </li>
@@ -183,13 +183,13 @@ export function SiteFooter() {
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-slate-400">
               <a
-                href="mailto:hello@scaleflow.example?subject=Privacy%20policy%20request"
+                href="mailto:hopmblessing@gmail.com?subject=Privacy%20policy%20request"
                 className="transition hover:text-sky-300"
               >
                 Privacy
               </a>
               <a
-                href="mailto:hello@scaleflow.example?subject=Terms%20of%20service%20request"
+                href="mailto:hopmblessing@gmail.com?subject=Terms%20of%20service%20request"
                 className="transition hover:text-sky-300"
               >
                 Terms

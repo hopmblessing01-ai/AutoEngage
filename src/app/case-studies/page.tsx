@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Case studies",
   description:
     "Real automation and CRM delivery examples: operational bottlenecks, implementation approach, and measurable outcomes.",
+  alternates: {
+    canonical: "/case-studies",
+  },
 };
 
 export default function CaseStudiesPage() {

@@ -8,39 +8,43 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    title: "CRM Cleanup + Lead Routing",
-    industry: "B2B services",
+    title: "Mobile Auto Repair Chatbot & Voice Agent System",
+    industry: "Field service · Automotive",
     challenge:
-      "Leads were delayed because duplicate records and unclear ownership slowed first response.",
+      "The business was missing leads and delaying responses because chat and call inquiries were not handled consistently across channels.",
     solution:
-      "We standardized lifecycle stages, deduplicated records, and automated assignment by region and segment.",
-    outcome: "Faster response times and cleaner forecasting",
+      "We implemented a chatbot + voice agent first-response system integrated with booking and CRM workflows, then connected scheduling, dispatch, and customer notifications so inquiries convert faster.",
+    outcome:
+      "Faster response times, smoother field operations, and more consistent customer communication.",
   },
   {
-    title: "Ops Workflow Automation",
-    industry: "Field operations",
+    title: "AI Meeting Notes for Microsoft Teams",
+    industry: "Internal operations",
     challenge:
-      "Sales, onboarding, and delivery handoffs depended on manual status updates and follow-up messages.",
+      "Meeting follow-through was inconsistent because decisions and action items were not captured in a reliable, repeatable way.",
     solution:
-      "We connected CRM updates to task creation, internal notifications, and client onboarding milestones.",
-    outcome: "Fewer dropped handoffs across teams",
+      "We implemented an AI-powered meeting notes workflow that turns conversations into structured summaries, decisions, and action items with consistent delivery after each meeting.",
+    outcome:
+      "A zero-manual notes process with validation, logging, and error handling to prevent duplicates and missed summaries.",
   },
   {
-    title: "Unified Reporting Layer",
-    industry: "SaaS support and success",
+    title: "Automated Follow-Up for Unanswered Teams Messages",
+    industry: "Customer support operations",
     challenge:
-      "Leadership reporting took hours weekly because KPI data lived in separate systems.",
+      "Important Teams messages were being missed, creating delayed responses and uneven support quality.",
     solution:
-      "We implemented a shared metric layer with scheduled syncs and role-specific dashboard views.",
-    outcome: "Clear visibility into bottlenecks",
+      "We built an AI-assisted follow-up automation that detects unanswered messages and prepares context-aware responses using approved communication patterns.",
+    outcome:
+      "Reliable follow-up coverage, more consistent response quality, and fewer missed support messages.",
   },
   {
-    title: "Invoice-to-Fulfillment Sync",
-    industry: "Professional services",
+    title: "Monday.com Workflow Sync Across Teams",
+    industry: "Project management",
     challenge:
-      "Project kickoff lagged behind payment confirmation due to disconnected finance and delivery workflows.",
+      "Project teams were repeating manual updates across multiple Monday boards, creating data mismatch and extra coordination overhead.",
     solution:
-      "We wired payment events to automated project setup, task routing, and delivery alerts.",
-    outcome: "Shorter time from payment to project kickoff",
+      "We designed linked Monday.com boards with cross-board automations and integrated Google apps so status changes update automatically without back-and-forth entry.",
+    outcome:
+      "Cleaner project visibility, reduced manual updates, and smoother cross-team delivery.",
   },
 ];

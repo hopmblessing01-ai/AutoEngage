@@ -44,7 +44,7 @@ export function SiteHeader() {
             onClick={() => setOpen(false)}
           >
             <Image
-              src="/images/logo-image.png"
+              src="/images/logo3.png"
               alt="Comet logo"
               width={170}
               height={42}

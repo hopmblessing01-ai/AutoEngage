@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "CRM, workflow automation, AI assistants, and automation consulting - from discovery through delivery.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default function ServicesIndexPage() {

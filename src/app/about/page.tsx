@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "About us",
   description:
     "Comet builds maintainable automation and CRM systems for growing teams - and the people behind the work.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {

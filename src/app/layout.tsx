@@ -9,7 +9,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = "https://example.com";
+const siteUrl = "https://autoengage.com";
 
 export const viewport: Viewport = {
   themeColor: "#f8fafc",
@@ -19,10 +19,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: "Comet",
   icons: {
     icon: "./favicon.ico",
     shortcut: "./favicon.ico",
     apple: "./favicon.ico",
+  },
+  alternates: {
+    canonical: "/",
   },
   title: {
     default: "Comet | Business Automation & CRM Consulting",
@@ -43,6 +47,7 @@ export const metadata: Metadata = {
     title: "Comet | Business Automation & CRM Consulting",
     description:
       "Eliminate manual work and connect your tools into one efficient system. CRM, workflows, and AI automation.",
+    siteName: "Comet",
     type: "website",
     locale: "en_US",
     url: siteUrl,
@@ -60,13 +65,14 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Comet",
+  url: siteUrl,
   description:
     "Business automation and systems consulting: CRM, workflow automation, and AI assistants.",
   areaServed: "Worldwide",
   serviceType: [
     "CRM consulting",
     "Business process automation",
-    "API integration",
+    "Workflow automation",
     "AI chatbot implementation",
   ],
 };

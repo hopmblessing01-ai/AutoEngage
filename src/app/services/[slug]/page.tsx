@@ -29,10 +29,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   if (!isServiceSlug(slug)) return {};
   const s = services[slug];
+  const url = `/services/${slug}`;
   return {
     title: s.title,
     description: s.summary,
-    openGraph: { title: s.title, description: s.summary },
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: s.title,
+      description: s.summary,
+      url,
+    },
   };
 }
 

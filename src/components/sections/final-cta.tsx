@@ -29,13 +29,13 @@ export function FinalCtaSection() {
                 </p>
                 <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
                   <a
-                    href="mailto:hello@scaleflow.example?subject=Book%20a%20free%20call"
+                    href="mailto:hopmblessing@gmail.com?subject=Book%20a%20free%20call"
                     className="btn-shine relative inline-flex h-12 min-w-[200px] items-center justify-center overflow-hidden rounded-lg bg-white px-8 text-sm font-semibold text-blue-900 shadow-lg transition duration-300 hover:-translate-y-1 active:translate-y-0"
                   >
                     <span className="relative z-[1]">Book a Free Call</span>
                   </a>
                   <a
-                    href="mailto:hello@scaleflow.example?subject=Free%20system%20audit"
+                    href="mailto:hopmblessing@gmail.com?subject=Free%20system%20audit"
                     className="text-sm font-semibold text-sky-100 underline-offset-4 transition hover:text-white hover:underline"
                   >
                     Request an audit outline →

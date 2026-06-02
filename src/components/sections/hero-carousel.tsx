@@ -121,7 +121,7 @@ export function HeroCarousel() {
             className="object-cover object-[right_top]"
           />
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-blue-900/40 via-blue-700/20 to-blue-500/10"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-700/50 to-blue-500/10"
             aria-hidden
           />
         </div>
