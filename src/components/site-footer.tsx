@@ -48,7 +48,7 @@ export function SiteFooter() {
               durationMs={1000}
             >
               <p className="text-xl font-bold tracking-tight text-white">
-                Comet<span className="text-sky-400">.</span>
+                AutoEngage<span className="text-sky-400">.</span>
               </p>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-300">
                 We design and ship automation, CRM, and integrations your team can
@@ -178,7 +178,7 @@ export function SiteFooter() {
           <Reveal variant="fade-up" delayMs={120} durationMs={900}>
           <div className="flex flex-col items-start justify-between gap-6 pt-8 sm:flex-row sm:items-center">
             <p className="max-w-xl text-xs leading-relaxed text-slate-400">
-              Comet is a systems partner for growing teams: we align on outcomes,
+              AutoEngage is a systems partner for growing teams: we align on outcomes,
               map your stack, then automate with clear ownership - not a black box.
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-slate-400">
@@ -216,7 +216,7 @@ export function SiteFooter() {
         <Reveal variant="fade-scale" durationMs={900}>
           <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-2 sm:flex-row sm:justify-between sm:text-left">
             <p className="text-xs font-medium tracking-wide text-slate-400">
-              © {new Date().getFullYear()} Comet. All rights reserved.
+              © {new Date().getFullYear()} AutoEngage. All rights reserved.
             </p>
             <p className="text-[11px] text-slate-500">
               CRM · workflows · integrations · AI guardrails you control

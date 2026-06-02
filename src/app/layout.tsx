@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: "Comet",
+  applicationName: "AutoEngage",
   icons: {
     icon: "./favicon.ico",
     shortcut: "./favicon.ico",
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Comet | Business Automation & CRM Consulting",
-    template: "%s | Comet",
+    default: "AutoEngage | Business Automation & CRM Consulting",
+    template: "%s | AutoEngage",
   },
   description:
     "We design and automate business systems that scale your operations - from CRM setup to AI-powered workflows. Book a free consultation.",
@@ -44,17 +44,17 @@ export const metadata: Metadata = {
     "AI chatbots",
   ],
   openGraph: {
-    title: "Comet | Business Automation & CRM Consulting",
+    title: "AutoEngage | Business Automation & CRM Consulting",
     description:
       "Eliminate manual work and connect your tools into one efficient system. CRM, workflows, and AI automation.",
-    siteName: "Comet",
+    siteName: "AutoEngage",
     type: "website",
     locale: "en_US",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Comet | Business Automation & CRM Consulting",
+    title: "AutoEngage | Business Automation & CRM Consulting",
     description:
       "Eliminate manual work and connect your tools into one efficient system.",
   },
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Comet",
+  name: "AutoEngage",
   url: siteUrl,
   description:
     "Business automation and systems consulting: CRM, workflow automation, and AI assistants.",

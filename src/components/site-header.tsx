@@ -45,7 +45,7 @@ export function SiteHeader() {
           >
             <Image
               src="/images/logo3.png"
-              alt="Comet logo"
+              alt="AutoEngage logo"
               width={170}
               height={42}
               className="h-9 w-auto sm:h-10"
