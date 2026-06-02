@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
     siteName,
     type: "website",
-    locale: "en_US",
+    locale: "en_GB",
     url: siteUrl,
   },
   twitter: {
@@ -85,7 +85,7 @@ const jsonLd = [
     url: siteUrl,
     email: contactEmail,
     description: defaultDescription,
-    sameAs: [],
+    sameAs: ["https://blessingigwegbe.com"],
   },
   {
     "@context": "https://schema.org",
