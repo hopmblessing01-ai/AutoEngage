@@ -79,7 +79,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-12 grid max-w-4xl gap-8 sm:grid-cols-2">
             {teamMembers.map((member, i) => (
               <Reveal
                 key={member.name}
@@ -87,24 +87,24 @@ export default function AboutPage() {
                 delayMs={i * 80}
                 durationMs={1000}
               >
-                <article className="group overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_8px_30px_-12px_rgba(15,23,42,0.1)] transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
-                  <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
+                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_12px_40px_-16px_rgba(15,23,42,0.14)] transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl">
+                  <div className="relative h-[360px] overflow-hidden bg-slate-100 sm:h-[420px]">
                     <Image
                       src={member.image}
                       alt={member.imageAlt}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-base font-semibold text-slate-900">
+                  <div className="flex flex-1 flex-col border-t border-slate-100 bg-gradient-to-b from-blue-50/40 to-white px-5 py-5 sm:px-6 sm:py-6">
+                    <h3 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-[1.35rem]">
                       {member.name}
                     </h3>
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">
                       {member.role}
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                    <p className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-[0.9375rem] sm:leading-7">
                       {member.bio}
                     </p>
                   </div>

@@ -67,18 +67,25 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let cancelled = false;
+
+    const safeSetVisible = () => {
+      if (!cancelled) setVisible(true);
+    };
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       queueMicrotask(() => {
-        setVisible(true);
+        safeSetVisible();
       });
-      return;
+      return () => {
+        cancelled = true;
+      };
     }
 
     const show = () => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          setVisible(true);
+          safeSetVisible();
         });
       });
     };
@@ -95,7 +102,10 @@ export function Reveal({
       },
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    return () => {
+      cancelled = true;
+      obs.disconnect();
+    };
   }, []);
 
   const opacityMs = Math.round(Math.min(820, durationMs * 0.72));

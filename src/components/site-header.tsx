@@ -44,7 +44,7 @@ export function SiteHeader() {
             onClick={() => setOpen(false)}
           >
             <Image
-              src="/images/logo3.png"
+              src="/images/logo4.png"
               alt="AutoEngage logo"
               width={170}
               height={42}
