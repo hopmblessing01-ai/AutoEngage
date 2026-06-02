@@ -1,5 +1,5 @@
 /** Shared SEO config — used in layout, sitemap, robots, and JSON-LD. */
-export const siteUrl = "https://autoengage.com";
+export const siteUrl = "https://autoengage.uk.com";
 export const siteName = "AutoEngage";
 export const siteTagline = "CRM, Workflow & AI Automation";
 export const defaultDescription =
