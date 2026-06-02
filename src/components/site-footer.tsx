@@ -3,7 +3,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 const exploreLinks = [
-  { href: "/#problem", label: "Challenges" },
+  { href: "/#problem", label: "What you gain" },
   { href: "/services", label: "Services" },
   { href: "/case-studies", label: "Case studies" },
   { href: "/#process", label: "How it works" },

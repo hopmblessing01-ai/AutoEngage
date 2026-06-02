@@ -1,4 +1,4 @@
-import { AlertTriangle, Bot, Link2Off, Inbox } from "lucide-react";
+import { Bot, Link2, TrendingUp, Workflow } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import {
   serviceCardBodyClass,
@@ -7,25 +7,25 @@ import {
   serviceCardTitleClass,
 } from "@/lib/service-card-styles";
 
-const pains = [
+const benefits = [
   {
-    title: "Manual repetitive tasks",
-    body: "Your team re-enters the same data, chases updates, and burns hours on work software should handle.",
-    icon: AlertTriangle,
+    title: "Automated daily operations",
+    body: "Your team spends less time on repeat data entry and status chasing. Reliable workflows run in the background while people focus on higher-value work.",
+    icon: Workflow,
   },
   {
-    title: "Disconnected tools",
-    body: "HubSpot doesn’t talk to finance. Slack isn’t tied to fulfillment. Every handoff is another delay.",
-    icon: Link2Off,
+    title: "One connected stack",
+    body: "CRM, finance, comms, and fulfillment stay in sync so handoffs are faster, cleaner, and easier to trust across teams.",
+    icon: Link2,
   },
   {
-    title: "Missed leads",
-    body: "Slow follow-ups and leaky handoffs quietly cost revenue - especially when volume spikes.",
-    icon: Inbox,
+    title: "Faster lead follow-up",
+    body: "Consistent routing and timely responses help you convert more conversations into revenue—even when inquiry volume increases.",
+    icon: TrendingUp,
   },
   {
-    title: "No chatbot or voice agent coverage",
-    body: "When calls and chats are missed, leads go cold. AI chatbots and voice agents can qualify, answer, and route inquiries instantly.",
+    title: "24/7 chat & voice coverage",
+    body: "AI chatbots and voice agents qualify inquiries, answer common questions, and route hot leads instantly—day or night.",
     icon: Bot,
   },
 ];
@@ -36,19 +36,19 @@ export function ProblemSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal variant="fade-scale" durationMs={1000}>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">
-            The real cost of “busy”
+            What you gain
           </p>
           <h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            When operations depend on heroics, growth becomes fragile
+            Systems that help your business run smoothly at scale
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
-            We help founders and operators replace fragile manual processes with
-            dependable systems - so your business runs even when you step away.
+            We help founders and operators connect tools, automate repetitive work,
+            and respond faster—so growth feels steady, not fragile.
           </p>
         </Reveal>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2">
-          {pains.map((item, i) => (
+          {benefits.map((item, i) => (
             <Reveal
               key={item.title}
               variant={i % 2 === 0 ? "slide-left" : "slide-right"}
