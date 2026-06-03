@@ -13,7 +13,7 @@ Submissions are sent to **hopmblessing@gmail.com** via [Resend](https://resend.c
 
 | Variable | Value |
 |----------|--------|
-| `RESEND_API_KEY` | Your Resend API key (`re_...`) |
+| `RESEND_API_KEY` | Your Resend API key (create in Resend dashboard; do not commit to git) |
 | `CONTACT_TO_EMAIL` | `hopmblessing@gmail.com` (optional; this is the default) |
 | `CONTACT_FROM_EMAIL` | `AutoEngage <onboarding@resend.dev>` — **your** sender address, not the visitor’s (see below) |
 
