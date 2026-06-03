@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { contactEmail, siteName } from "@/lib/site-seo";
 
+export const runtime = "nodejs";
+
 type Body = {
   name?: string;
   email?: string;
@@ -10,8 +12,27 @@ type Body = {
 };
 
 const toAddress = process.env.CONTACT_TO_EMAIL ?? contactEmail;
-const fromAddress =
-  process.env.CONTACT_FROM_EMAIL ?? `${siteName} <onboarding@resend.dev>`;
+
+/** Resend test sender — works without a verified domain. */
+const DEFAULT_FROM = `${siteName} <onboarding@resend.dev>`;
+
+/**
+ * Custom "from" only when using a verified domain in Resend.
+ * Ignores CONTACT_FROM_EMAIL if it points at Gmail etc. (common misconfiguration).
+ */
+function resolveFromAddress(): string {
+  const custom = process.env.CONTACT_FROM_EMAIL?.trim();
+  if (!custom) return DEFAULT_FROM;
+
+  const emailPart = custom.includes("<")
+    ? custom.slice(custom.indexOf("<") + 1, custom.indexOf(">")).trim()
+    : custom.trim();
+
+  if (emailPart.endsWith("@resend.dev")) return custom;
+  if (process.env.RESEND_DOMAIN_VERIFIED === "true") return custom;
+
+  return DEFAULT_FROM;
+}
 
 function buildEmailBody(data: {
   name: string;
@@ -53,6 +74,11 @@ function escapeHtml(value: string) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function formatReplyTo(name: string, email: string): string {
+  const safeName = name.replace(/"/g, "").trim();
+  return safeName ? `"${safeName}" <${email}>` : email;
 }
 
 export async function POST(request: Request) {
@@ -110,20 +136,22 @@ export async function POST(request: Request) {
 
   const { text, html } = buildEmailBody({ name, email, company, message });
   const resend = new Resend(apiKey);
+  const from = resolveFromAddress();
 
   const { error } = await resend.emails.send({
-    // "from" must be an address you control (Resend / your domain) — not the visitor's email.
-    from: fromAddress,
+    from,
     to: [toAddress],
-    // Visitor's form email: hitting Reply in Gmail goes to them.
-    replyTo: `${name} <${email}>`,
+    replyTo: formatReplyTo(name, email),
     subject: `[${siteName}] Contact from ${name}`,
     text,
     html,
   });
 
   if (error) {
-    console.error("[contact] Resend error:", error);
+    console.error("[contact] Resend error:", error.name, error.message, {
+      from,
+      to: toAddress,
+    });
     return NextResponse.json(
       { ok: false, error: "Could not send your message. Please try again or email us directly." },
       { status: 502 },

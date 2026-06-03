@@ -15,18 +15,26 @@ Submissions are sent to **hopmblessing@gmail.com** via [Resend](https://resend.c
 |----------|--------|
 | `RESEND_API_KEY` | Your Resend API key (create in Resend dashboard; do not commit to git) |
 | `CONTACT_TO_EMAIL` | `hopmblessing@gmail.com` (optional; this is the default) |
-| `CONTACT_FROM_EMAIL` | `AutoEngage <onboarding@resend.dev>` — **your** sender address, not the visitor’s (see below) |
+| `CONTACT_FROM_EMAIL` | **Leave unset** until you verify a domain in Resend (see below) |
+| `RESEND_DOMAIN_VERIFIED` | Set to `true` only after your domain is verified in Resend |
 
 Redeploy the site after saving.
 
 ## 3. Resend restrictions (important)
 
-- With **no verified domain**, Resend only allows sending **from** `onboarding@resend.dev`.
-- On the free/test setup, emails may only be delivered to the **email address you used to sign up for Resend** until you verify a domain.
-- To send reliably to `hopmblessing@gmail.com` from production, either:
-  - Sign up for Resend with `hopmblessing@gmail.com`, or
-  - Verify **autoengage.uk.com** in Resend and set  
-    `CONTACT_FROM_EMAIL=AutoEngage <hello@autoengage.uk.com>` (or similar).
+- With **no verified domain**, sending uses **`onboarding@resend.dev`** automatically.
+- In test mode, Resend may only deliver to the **email you used to sign up for Resend**.  
+  Set `CONTACT_TO_EMAIL` to that same address, **or** verify **autoengage.uk.com** in Resend so you can deliver to `hopmblessing@gmail.com`.
+- **Do not** set `CONTACT_FROM_EMAIL` to a Gmail address — Resend will reject it and the form will fail.
+- After domain verification:  
+  `CONTACT_FROM_EMAIL=AutoEngage <hello@autoengage.uk.com>` and `RESEND_DOMAIN_VERIFIED=true`
+
+## Troubleshooting “Could not send your message”
+
+1. **Rotate & update API key** in Netlify if it was ever committed to git.
+2. **Remove** bad `CONTACT_FROM_EMAIL` from Netlify (or leave empty).
+3. Check **Netlify function logs** for `[contact] Resend error:` after a test submit.
+4. In Resend dashboard → **Domains** → verify `autoengage.uk.com` if `CONTACT_TO_EMAIL` is not your Resend login email.
 
 ## 4. Local testing
 
