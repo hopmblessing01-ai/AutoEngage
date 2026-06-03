@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { submitContactForm } from "@/lib/contact-form-submit";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -11,35 +12,30 @@ export function ContactForm() {
     const form = e.currentTarget;
     setStatus("loading");
     setError(null);
+
     const fd = new FormData(form);
+    const email = String(fd.get("email") ?? "").trim();
+
+    if (email.endsWith(".co") && !email.endsWith(".com")) {
+      setError("Check your email address — did you mean .com instead of .co?");
+      setStatus("error");
+      return;
+    }
+
     const payload = {
-      name: String(fd.get("name") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      company: String(fd.get("company") ?? ""),
-      message: String(fd.get("message") ?? ""),
+      name: String(fd.get("name") ?? "").trim(),
+      email,
+      company: String(fd.get("company") ?? "").trim(),
+      message: String(fd.get("message") ?? "").trim(),
     };
+
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      let data: { ok?: boolean; error?: string };
-      try {
-        data = (await res.json()) as { ok?: boolean; error?: string };
-      } catch {
-        setError("Server error. Please try again or email us directly.");
+      const result = await submitContactForm(payload);
+      if (!result.ok) {
+        setError(result.error ?? "Something went wrong.");
         setStatus("error");
         return;
       }
-
-      if (!res.ok || !data.ok) {
-        setError(data.error ?? "Something went wrong.");
-        setStatus("error");
-        return;
-      }
-
       setStatus("success");
       form.reset();
     } catch {
@@ -50,9 +46,20 @@ export function ContactForm() {
 
   return (
     <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
       onSubmit={onSubmit}
       className="relative rounded-2xl border border-slate-200/90 bg-white p-6 text-left shadow-lg sm:p-8"
     >
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden" aria-hidden>
+        <label>
+          Don’t fill this out: <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
+
       <h3 className="text-lg font-semibold text-slate-900">Send a message</h3>
       <p className="mt-1 text-sm text-slate-600">
         We typically reply within one business day.
@@ -115,7 +122,7 @@ export function ContactForm() {
       ) : null}
       {status === "success" ? (
         <p className="mt-4 text-sm font-medium text-emerald-700">
-          Thanks  -  your message is in. We’ll get back to you shortly.
+          Thanks — your message is in. We’ll get back to you shortly.
         </p>
       ) : null}
 
