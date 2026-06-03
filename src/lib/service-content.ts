@@ -1,3 +1,5 @@
+import { serviceCardImage, serviceInlineImage } from "@/lib/service-images";
+
 export type ServiceSlug = "crm" | "workflow" | "ai";
 
 export const serviceSlugs: ServiceSlug[] = [
@@ -43,12 +45,10 @@ export const services: Record<ServiceSlug, ServicePage> = {
       "Reporting leadership trusts: source, velocity, and forecast hygiene",
       "Integrations with billing, support, and product telemetry where needed",
     ],
-    coverImage:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=85",
-    coverImageAlt: "Analytics dashboard with charts on a laptop screen",
-    inlineImage:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=85",
-    inlineImageAlt: "Business metrics and growth charts on a desk",
+    coverImage: serviceCardImage("crm"),
+    coverImageAlt: "CRM pipeline and sales dashboard on a laptop",
+    inlineImage: serviceInlineImage("crm"),
+    inlineImageAlt: "Professional reviewing CRM data at a desk",
     highlights: [
       {
         title: "Stage & field design",
@@ -86,12 +86,10 @@ export const services: Record<ServiceSlug, ServicePage> = {
       "Versioned flows with naming conventions your team can extend",
       "Tool selection guidance: when to use Make vs n8n vs native integrations",
     ],
-    coverImage:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=2000&q=85",
-    coverImageAlt: "Developer laptop with code editor in a focused workspace",
-    inlineImage:
-      "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=85",
-    inlineImageAlt: "Code on screen representing automation logic",
+    coverImage: serviceCardImage("workflow"),
+    coverImageAlt: "Workflow automation builder on a monitor",
+    inlineImage: serviceInlineImage("workflow"),
+    inlineImageAlt: "Node-based automation workflow on screen",
     highlights: [
       {
         title: "Reliability first",
@@ -129,12 +127,10 @@ export const services: Record<ServiceSlug, ServicePage> = {
       "Voice flows with natural confirmations and PCI-aware patterns",
       "Evaluation harnesses so prompt changes don’t surprise production",
     ],
-    coverImage:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2000&q=85",
-    coverImageAlt: "Abstract gradient visualization suggesting AI and data",
-    inlineImage:
-      "https://images.unsplash.com/photo-1531746797555-097a803b1d50?auto=format&fit=crop&w=1600&q=85",
-    inlineImageAlt: "Customer support headset and friendly service context",
+    coverImage: serviceCardImage("ai"),
+    coverImageAlt: "AI chat and voice assistant workspace",
+    inlineImage: serviceInlineImage("ai"),
+    inlineImageAlt: "Headset and chat interface for AI customer support",
     highlights: [
       {
         title: "Guardrails & tone",

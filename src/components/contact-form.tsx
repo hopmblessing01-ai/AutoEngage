@@ -8,9 +8,10 @@ export function ContactForm() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
     setStatus("loading");
     setError(null);
-    const fd = new FormData(e.currentTarget);
+    const fd = new FormData(form);
     const payload = {
       name: String(fd.get("name") ?? ""),
       email: String(fd.get("email") ?? ""),
@@ -23,16 +24,26 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
+
+      let data: { ok?: boolean; error?: string };
+      try {
+        data = (await res.json()) as { ok?: boolean; error?: string };
+      } catch {
+        setError("Server error. Please try again or email us directly.");
+        setStatus("error");
+        return;
+      }
+
       if (!res.ok || !data.ok) {
         setError(data.error ?? "Something went wrong.");
         setStatus("error");
         return;
       }
+
       setStatus("success");
-      e.currentTarget.reset();
+      form.reset();
     } catch {
-      setError("Network error. Please try again.");
+      setError("Network error. Please try again or email us directly.");
       setStatus("error");
     }
   }
