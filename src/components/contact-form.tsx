@@ -46,20 +46,9 @@ export function ContactForm() {
 
   return (
     <form
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
       onSubmit={onSubmit}
       className="relative rounded-2xl border border-slate-200/90 bg-white p-6 text-left shadow-lg sm:p-8"
     >
-      <input type="hidden" name="form-name" value="contact" />
-      <p className="hidden" aria-hidden>
-        <label>
-          Don’t fill this out: <input name="bot-field" tabIndex={-1} autoComplete="off" />
-        </label>
-      </p>
-
       <h3 className="text-lg font-semibold text-slate-900">Send a message</h3>
       <p className="mt-1 text-sm text-slate-600">
         We typically reply within one business day.

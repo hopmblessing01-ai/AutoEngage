@@ -1,40 +1,41 @@
-# Contact form setup (Netlify Forms)
+# Contact form → hopmblessing@gmail.com
 
-The live site sends submissions through **Netlify Forms** (no Resend API key or `@autoengage.uk.com` mailbox required).
+The form uses **Web3Forms** to email you directly. No `@autoengage.uk.com` mailbox or Resend domain setup required.
 
-## 1. Deploy latest code
+## Setup (5 minutes)
 
-Push and wait for a successful Netlify deploy. The build includes `public/contact-netlify-detect.html` so Netlify registers the `contact` form.
+1. Go to [web3forms.com](https://web3forms.com)
+2. Enter **hopmblessing@gmail.com** and create an **Access Key**
+3. Check that inbox for the key (or copy it from the dashboard)
+4. **Netlify** → Site configuration → **Environment variables** → add:
 
-## 2. Turn on email notifications
+   | Name | Value |
+   |------|--------|
+   | `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | your Web3Forms access key |
 
-1. Netlify → your site → **Forms**
-2. You should see form name **contact**
-3. **Form notifications** → **Add notification** → **Email notification**
-4. Send to: **hopmblessing@gmail.com**
+5. **Deploy** the site again (required — `NEXT_PUBLIC_*` vars are baked in at build time)
 
-Submissions also appear in the Netlify **Forms** tab even before email is configured.
-
-## 3. Test on the live site
-
-1. Open `https://autoengage.uk.com/#contact`
-2. Use a full email like `you@gmail.com` (not `.co` unless that is your real address)
-3. Submit — you should see the green success message
-4. Check Netlify **Forms** → **contact** for the entry
+6. Submit a test on `https://autoengage.uk.com/#contact` and check **hopmblessing@gmail.com** (and spam)
 
 ## Local development
 
-On `localhost`, the form still uses `/api/contact` (logs to the terminal if `RESEND_API_KEY` is not set).
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`, then restart `npm run dev`.
 
-## Optional: Resend API (not required on Netlify)
+Without any key, localhost uses `/api/contact` (logs to terminal only).
 
-`/api/contact` remains for local dev. You do **not** need `RESEND_API_KEY` on Netlify for the contact form anymore.
+## Why Netlify Forms did not email you
+
+The site showed “success” but **Netlify never received** the submission (Next.js returns the homepage for `POST /`). Web3Forms fixes that.
+
+## Optional: Resend backup
+
+If `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` is **not** set, the form falls back to `/api/contact` + Resend (`RESEND_API_KEY` in Netlify).
 
 ## Troubleshooting
 
-| Issue | Fix |
-|-------|-----|
-| Success but no email | Add **Form notifications** in Netlify (step 2) |
-| Form not listed in Netlify | Redeploy after `contact-netlify-detect.html` is in the repo |
-| `.co` email warning | Use `.com` if that was a typo |
-| Still fails on live site | Check Netlify **Forms** → spam / verified submissions |
+| Problem | Fix |
+|---------|-----|
+| Success but no email | Add `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` and **redeploy** |
+| Still nothing | Confirm Web3Forms is registered to **hopmblessing@gmail.com** |
+| Error on submit | Check browser DevTools → Network → `api.web3forms.com` response |
+| Emails in spam | Mark as “Not spam” once |

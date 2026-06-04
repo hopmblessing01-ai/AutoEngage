@@ -1,3 +1,5 @@
+import { siteName } from "@/lib/site-seo";
+
 export type ContactPayload = {
   name: string;
   email: string;
@@ -5,49 +7,51 @@ export type ContactPayload = {
   message: string;
 };
 
-const FORM_NAME = "contact";
+type SubmitResult = { ok: boolean; error?: string };
 
-function encodeFormBody(fields: Record<string, string>): string {
-  return Object.entries(fields)
-    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-    .join("&");
-}
-
-function isLocalDevHost(hostname: string): boolean {
-  return (
-    hostname === "localhost" ||
-    hostname === "127.0.0.1" ||
-    hostname.endsWith(".local")
-  );
-}
-
-/** Netlify Forms — works on autoengage.uk.com without Resend. */
-export async function submitViaNetlifyForm(
+/** Web3Forms — sends to your inbox (hopmblessing@gmail.com). Free at web3forms.com */
+export async function submitViaWeb3Forms(
   payload: ContactPayload,
-): Promise<{ ok: boolean; error?: string }> {
-  const body = encodeFormBody({
-    "form-name": FORM_NAME,
-    name: payload.name,
-    email: payload.email,
-    company: payload.company,
-    message: payload.message,
-    "bot-field": "",
-  });
+  accessKey: string,
+): Promise<SubmitResult> {
+  const companyBlock = payload.company
+    ? `\nCompany: ${payload.company}`
+    : "";
 
-  const res = await fetch("/", {
+  const res = await fetch("https://api.web3forms.com/submit", {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      access_key: accessKey,
+      subject: `[${siteName}] Contact from ${payload.name}`,
+      from_name: payload.name,
+      name: payload.name,
+      email: payload.email,
+      replyto: payload.email,
+      message: `${payload.message}${companyBlock}`,
+      botcheck: false,
+    }),
   });
 
-  if (res.ok) return { ok: true };
-  return { ok: false, error: "Could not send your message. Please try again or email us directly." };
+  let data: { success?: boolean; message?: string };
+  try {
+    data = (await res.json()) as { success?: boolean; message?: string };
+  } catch {
+    return { ok: false, error: "Server error. Please try again or email us directly." };
+  }
+
+  if (data.success) return { ok: true };
+  return {
+    ok: false,
+    error: data.message ?? "Could not send your message. Please try again or email us directly.",
+  };
 }
 
-/** API route (Resend) — used on localhost only. */
-export async function submitViaApi(
-  payload: ContactPayload,
-): Promise<{ ok: boolean; error?: string }> {
+/** Resend via /api/contact — backup if Web3Forms key is not set. */
+export async function submitViaApi(payload: ContactPayload): Promise<SubmitResult> {
   const res = await fetch("/api/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -69,14 +73,12 @@ export async function submitViaApi(
 
 export async function submitContactForm(
   payload: ContactPayload,
-): Promise<{ ok: boolean; error?: string }> {
-  if (typeof window === "undefined") {
-    return { ok: false, error: "Form can only be submitted in the browser." };
+): Promise<SubmitResult> {
+  const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+
+  if (web3Key) {
+    return submitViaWeb3Forms(payload, web3Key);
   }
 
-  if (isLocalDevHost(window.location.hostname)) {
-    return submitViaApi(payload);
-  }
-
-  return submitViaNetlifyForm(payload);
+  return submitViaApi(payload);
 }

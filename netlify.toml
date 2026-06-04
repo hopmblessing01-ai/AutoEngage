@@ -2,8 +2,10 @@
   command = "npm run build"
 
 # .env.example is documentation only (no real keys).
+# NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY must be set in Netlify UI for contact form email.
 [build.environment]
   SECRETS_SCAN_OMIT_PATHS = ".env.example"
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
